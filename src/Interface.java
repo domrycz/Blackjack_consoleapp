@@ -1,32 +1,15 @@
-package java;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Interface {
 
-    private static Map<Integer, Card> cards = new HashMap<>();
-
-    static {
-        cards.put(1, new Card("2", 2));
-        cards.put(2, new Card("3", 3));
-        cards.put(3, new Card("4", 4));
-        cards.put(4, new Card("5", 5));
-        cards.put(5, new Card("6", 6));
-        cards.put(6, new Card("7", 7));
-        cards.put(7, new Card("8", 8));
-        cards.put(8, new Card("9", 9));
-        cards.put(9, new Card("10", 10));
-        cards.put(10, new Card("J", 10));
-        cards.put(11, new Card("Q", 10));
-        cards.put(12, new Card("K", 10));
-        cards.put(13, new Card("A", 11));
-        cards.put(14, new Card("A", 1));
-    }
-
     public static void main(String[] args) {
+
+        CardGenerator cardGen = new CardGenerator();
 
         System.out.println("Welcome to BlackJack!");
         System.out.print("Enter your name: ");
@@ -36,16 +19,28 @@ public class Interface {
 
         String userChoice;
 
-        Random cardGenerator = new Random();
-
         Integer CompResult = 0;
         Integer UserResult = 0;
 
 
-        System.out.println("Dealer's visible card " + cards.get((cardGenerator.nextInt(11)+2)));
+        Card card = cardGen.takeCard();
+        System.out.println("Dealer's visible card is: " + card);
+        CompResult += card.getValue();
 
+        System.out.print("Your cards: ");
+        Card userCard1 = cardGen.takeCard();
+        Card userCard2 = cardGen.takeCard();
+        UserResult = userCard1.getValue() + userCard2.getValue();
+        System.out.println(userCard1 + ", " + userCard2);
 
+        System.out.println("What are you going to do?\n");
+        System.out.println("(T) Take a card");
+        System.out.println("(P) Pass");
+        do {
+            System.out.print("Your choice: ");
+            userChoice = stdin.nextLine();
+        } while(!userChoice.equals("T") && !userChoice.equals("P"));
 
-
+        System.out.println(CardGenerator.getCards());
     }
 }

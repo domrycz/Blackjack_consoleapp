@@ -1,4 +1,3 @@
-package java;
 
 public class Card {
     private String name;
@@ -23,5 +22,10 @@ public class Card {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
